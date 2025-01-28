@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.gestor;
+package BBDD;
 
 /**
  *
@@ -13,17 +13,16 @@ public class Empleado {
     //Atributos
     
     private String nombre;
-    private int cod_empleado;
     private String password;
+    private int cod_acceso;
     
     //Constructor
 
-    public Empleado(String nombre, int cod_empleado, String password) {
+    public Empleado(String nombre, String password, int cod_acceso) {
         this.nombre = nombre;
-        this.cod_empleado = cod_empleado;
         this.password = password;
+        this.cod_acceso = cod_acceso;
     }
-    
     
     //Constructor vacío
 
@@ -41,14 +40,6 @@ public class Empleado {
         this.nombre = nombre;
     }
 
-    public int getCod_empleado() {
-        return cod_empleado;
-    }
-
-    public void setCod_empleado(int cod_empleado) {
-        this.cod_empleado = cod_empleado;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -56,8 +47,21 @@ public class Empleado {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public int getCod_acceso() {
+        return cod_acceso;
+    }
+
+    public void setCod_acceso(int cod_acceso) {
+        this.cod_acceso = cod_acceso;
+    }
     
-    
+    //toString
+
+    @Override
+    public String toString() {
+        return "Empleado{" + "nombre=" + nombre + ", password=" + password + ", cod_acceso=" + cod_acceso + '}';
+    }
     
     
     

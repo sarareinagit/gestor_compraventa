@@ -4,6 +4,8 @@
 
 package com.mycompany.gestor;
 
+import GUI.Principal;
+
 /**
  *
  * @author Ilerna 4.2.7
@@ -11,6 +13,6 @@ package com.mycompany.gestor;
 public class GESTOR {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        new Principal().autenticar();
     }
 }
