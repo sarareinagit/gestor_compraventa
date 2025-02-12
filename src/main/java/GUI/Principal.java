@@ -53,7 +53,7 @@ public class Principal {
             switch(x){
                 case 1 -> {submenu1();}
                 case 2 -> {}
-                case 3 -> {}
+                case 3 -> {submenu2();}
                 case 4 -> {}
                 default ->{}            
                 }
@@ -61,6 +61,7 @@ public class Principal {
     
     }
     
+    //Submenú para Gestionar Empleado
     public void submenu1(){
             int y=0;           
             do{
@@ -143,6 +144,31 @@ public class Principal {
             }
             }while(y!=6);
     }
+    
+    //Submenú para Gestionar Producto
+    public void submenu2(){
+    int x=0;           
+            do{
+            System.out.println("\nElija opción:");
+            System.out.println("1.- Alta Producto");
+            System.out.println("2.- Modificar Producto");
+            System.out.println("3.- Buscar Producto");
+            System.out.println("4.- Eliminar Producto");
+            System.out.println("5.- Listar Productos");
+            System.out.println("6.- Salir");
+            x=sc.nextInt();
+                switch(x){
+                    case 1 -> {}
+                    case 2 -> {}
+                    case 3 -> {}
+                    case 4 -> {}
+                    case 5 -> {}
+                    default -> {}
+                }   
+            }while(x!=6);
+    }
+    
+    
     
     public int introduceCodigo(){
        boolean bandera = true;

@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class DAOEmpleado {
        ConexionMySQL conexion = new ConexionMySQL();
-    PreparedStatement ps=null;
+       PreparedStatement ps=null;
     
     public void altaEmpleado(Empleado e){
     try {
@@ -83,6 +83,7 @@ public class DAOEmpleado {
         }        
         return lista;
     }
+    
     public void modificarEmpleado(Empleado e){
     try {
         Connection con = conexion.conectarMySQL();

@@ -11,7 +11,8 @@ import java.util.ArrayList;
  * @author Ilerna 4.2.7
  */
 public class FachadaBBDD {
-
+    
+    //EMPLEADOS
     public Empleado getEmpleado(String nombre){
     return DAOEmpleado.getInstance().getEmpleado(nombre);   
     }
@@ -31,4 +32,9 @@ public class FachadaBBDD {
     public ArrayList<Empleado> getAllEmpleado() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+    
+    //PRODUCTOS
+  
+    
 }

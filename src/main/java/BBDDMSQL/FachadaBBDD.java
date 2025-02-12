@@ -15,22 +15,49 @@ import java.util.ArrayList;
  */
 public class FachadaBBDD {
     
-    public Empleado getEmpleado(String nombre) throws SQLException{
-    return new DAOEmpleado().getEmpleado(nombre);
+    //Métodos para Empleado (conectado con DAOEmpleado)
+    public void altaEmpleado(Empleado e){
+        new DAOEmpleado().altaEmpleado(e);
     }
     
-    public void altaEmpleado(Empleado e){
-    new DAOEmpleado().altaEmpleado(e);
-    }
+    public Empleado getEmpleado(String nombre) throws SQLException{
+        return new DAOEmpleado().getEmpleado(nombre);
+    } 
+   
     public void eliminarEmpleado(String e){
-    new DAOEmpleado().eliminarEmpleado(e);
+        new DAOEmpleado().eliminarEmpleado(e);
+    }
+    
+    public void modificarEmpleado(Empleado e){
+        new DAOEmpleado().modificarEmpleado(e);
     }
     
     public ArrayList<Empleado> getAllEmpleado() throws SQLException{
-    return new DAOEmpleado().getAll();
+        return new DAOEmpleado().getAll();
     }
-    public void modificarEmpleado(Empleado e){
-    new DAOEmpleado().modificarEmpleado(e);
+    
+    
+    
+    //Métodos para Producto (conectado con DAOProducto)
+    public void altaProducto(Producto p){
+        new DAOProducto().altaProducto(p);
     }
+    
+    public Producto getProducto(String nombre) throws SQLException{
+        return new DAOProducto().getProducto(nombre);
+    }
+    
+    public void eliminarProducto(String p){
+        new DAOProducto().eliminarProducto(p);
+    }
+    
+    public void modificarProducto(Producto p){
+        new DAOProducto().modificarProducto(p);
+    }
+    
+    public ArrayList<Producto> getAllProducto() throws SQLException{
+        return new DAOProducto().getAll();
+    }
+    
 }
 
