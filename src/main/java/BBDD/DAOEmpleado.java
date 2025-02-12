@@ -11,25 +11,17 @@ import java.util.ArrayList;
  * @author Ilerna 4.2.7
  */
 public class DAOEmpleado {
-    Empleado pepe = null;
+    //Empleado pepe = null;
     ArrayList<Empleado> listaEmpleados = new ArrayList();
-    
-    //Necesitamos tener un empleado inicial, un objeto único en el sistema -> SINGLETON
-    
     private static final DAOEmpleado INSTANCE = new DAOEmpleado();
-    // El constructor privado no permite que se genere un constructor por defecto
-    private DAOEmpleado() {
-        listaEmpleados.add(new Empleado("Pepe","pepe",1));
-    }
 
+    private DAOEmpleado() {        
+        listaEmpleados.add(new Empleado("pepe", "pepe",1));        
+    }
+    
     public static DAOEmpleado getInstance() {
         return INSTANCE;
     }
-
-    
-    
-    
-    //Getter and Setter del ArrayList
 
     public ArrayList<Empleado> getListaEmpleados() {
         return listaEmpleados;
@@ -37,18 +29,22 @@ public class DAOEmpleado {
 
     public void setListaEmpleados(ArrayList<Empleado> listaEmpleados) {
         this.listaEmpleados = listaEmpleados;
-        
     }
     
-    //Método para comprobar si en la lista de empleados está un empleado específico
     public Empleado getEmpleado(String nombre){
+        Empleado pepe = null;
         for(Empleado e: listaEmpleados){
-            if(e.getNombre().equals(nombre)){
-                pepe = e;
+            if(e.getNombre().equals(nombre)){ 
+                System.out.println("entrooooo");
+                pepe=e;
             }
         }
-        return pepe;
+    return pepe;
     }
     
+    public void altaEmpleado(Empleado e){
+        listaEmpleados.add(e);    
+    }
     
+  
 }

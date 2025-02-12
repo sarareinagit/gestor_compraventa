@@ -12,4 +12,11 @@
         <exec.mainClass>com.mycompany.gestor.GESTOR</exec.mainClass>
     </properties>
     <name>gestor_compraventa</name>
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+    </dependencies>
 </project>

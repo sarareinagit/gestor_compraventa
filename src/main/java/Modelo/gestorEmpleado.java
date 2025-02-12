@@ -6,6 +6,9 @@ package Modelo;
 
 import BBDD.Empleado;
 import BBDD.FachadaBBDD;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  *
@@ -13,25 +16,53 @@ import BBDD.FachadaBBDD;
  */
 public class gestorEmpleado {
     
-    //Método para introducir empleado
-    
-    public int introducirEmpleado(String nombre, String password) throws Exception{
-        
-        Empleado pepe = new FachadaBBDD().getEmpleado(nombre);
-        //Si pepe es distinto de null, significa que es un empleado válido
-        if (pepe != null){
-        //Comprobar la contraseña
-        if(!pepe.getPassword().equals(password)){
-            throw new Exception("La contraseña es incorrecta.");
-        }
-        //Lanzamos la excepción de contraseña incorrecta
-        }else{
-         //Lanzamos la excepción de que el empleado no existe
-         throw new Exception("El empleado no existe.");
+ public int introducirEmpleado(String nombre, String password) throws Exception{
          
+         Empleado pepe = new FachadaBBDD().getEmpleado(nombre);
+         System.out.println("Cual es el valor de pepe: "+ pepe.toString());
+           if (pepe!=null){
+            //Comprobar la contraseña
+                if(!pepe.getPassword().equals(password)){
+                throw new Exception("La password es incorrecta");
+                }
+            //Lanzamos excepcion contraseña incorrecta
+            }else{
+           throw new Exception("El usuario no existe");
         }
-        //Si el nombre y la contraseña son válidos, entonces devuelve el código de acceso
-        return pepe.getCod_acceso();
-    }
+            return pepe.getCodAcceso();
+     }
+     
+     public void altaEmpleado(String nombre, String pass, int codigo) throws Exception{
+     //Comprobar si el empleado existe
+     
+     Empleado p = new FachadaBBDD().getEmpleado(nombre);
+     if (Objects.nonNull(p)){
+     throw new Exception("El empleado existe");
+     }
+     if (pass.length()<8){
+     throw new Exception("La password no tiene tamaño adecuado");
+     }
+     if(codigo>0){
+     }
+     new FachadaBBDD().altaEmpleado(new Empleado(nombre,pass,codigo));
+     }
+     
+     public void eliminarEmpleado(String e){
+     new FachadaBBDD().eliminarEmpleado(e);
+     
+     }
+     
+     public ArrayList<Empleado> getAllEmpleado() throws SQLException{
+     return new FachadaBBDD().getAllEmpleado();
+     }
+     
+     public Empleado getEmpleado(String nombre_) throws SQLException{
+     return new FachadaBBDD().getEmpleado(nombre_);
+     }
+     
+     public void modificarEmpleado(String nombre, String pass, int codigo) throws Exception{
+     new FachadaBBDD().modificarEmpleado(new Empleado(nombre,pass,codigo));
+     }
     
 }
+

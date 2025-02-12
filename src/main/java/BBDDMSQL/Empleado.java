@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package BBDD;
+package BBDDMSQL;
+
+import BBDD.*;
 
 /**
  *
@@ -13,24 +15,24 @@ public class Empleado {
     //Atributos
     String nombre,password;
     int codAcceso;
-    
+
     //Constructor
     public Empleado(String nombre, String password, int codAcceso) {
         this.nombre = nombre;
         this.password = password;
         this.codAcceso = codAcceso;
     }
-
-    //Constructor vacío    
+    
+    //Constructor vacío
     public Empleado() {
     }
-
+    
     //toString
     @Override
     public String toString() {
         return "Empleado{" + "nombre=" + nombre + ", password=" + password + ", codAcceso=" + codAcceso + '}';
     }
-
+    
     //Getter and Setter
     public String getNombre() {
         return nombre;
@@ -56,5 +58,5 @@ public class Empleado {
         this.codAcceso = codAcceso;
     }
     
-    
 }
+
