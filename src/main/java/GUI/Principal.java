@@ -4,7 +4,8 @@
  */
 package GUI;
 
-import BBDD.Empleado;
+
+import BBDDMSQL.Empleado;
 import Modelo.Fachada;
 import java.sql.SQLException;
 import java.util.InputMismatchException;
@@ -116,13 +117,17 @@ public class Principal {
                             System.out.println("El empleado no existe");
                         }
                     } catch (SQLException ex) {
-                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                        System.out.println("El usuario no existe.");
                     }
             }
 
             case 4 ->{
                 System.out.println("Indica el nombre del usuario a eliminar");
-                new Fachada().eliminarEmpleado(sc.next());
+                try {
+                    new Fachada().eliminarEmpleado(sc.next());
+                } catch (SQLException ex) {
+                   System.out.println("El usuario no existe.");
+                }
             
             }
             case 5 ->{

@@ -24,7 +24,7 @@ public class FachadaBBDD {
         return new DAOEmpleado().getEmpleado(nombre);
     } 
    
-    public void eliminarEmpleado(String e){
+    public void eliminarEmpleado(String e) throws SQLException{
         new DAOEmpleado().eliminarEmpleado(e);
     }
     

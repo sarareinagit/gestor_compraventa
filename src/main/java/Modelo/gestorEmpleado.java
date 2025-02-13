@@ -4,8 +4,10 @@
  */
 package Modelo;
 
-import BBDD.Empleado;
-import BBDD.FachadaBBDD;
+
+import BBDDMSQL.Empleado;
+import BBDDMSQL.FachadaBBDD;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -47,7 +49,7 @@ public class gestorEmpleado {
      new FachadaBBDD().altaEmpleado(new Empleado(nombre,pass,codigo));
      }
      
-     public void eliminarEmpleado(String e){
+     public void eliminarEmpleado(String e) throws SQLException{
      new FachadaBBDD().eliminarEmpleado(e);
      
      }

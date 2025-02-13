@@ -8,6 +8,7 @@ package com.mycompany.gestor;
 import BBDDMSQL.ConexionMySQL;
 import BBDDMSQL.DAOEmpleado;
 import BBDDMSQL.Empleado;
+import GUI.Principal;
 import java.sql.SQLException;
   
 
@@ -19,11 +20,11 @@ import java.sql.SQLException;
 public class GESTOR {
 
     public static void main(String[] args) throws SQLException {
-        //new Principal().autenticar();
-        ConexionMySQL enlace = new ConexionMySQL();
-        enlace.conectarMySQL();
-        DAOEmpleado emp =new DAOEmpleado();
-        emp.altaEmpleado(new Empleado("Luis","Luis",2));
+        new Principal().autenticar();
+//        ConexionMySQL enlace = new ConexionMySQL();
+//        enlace.conectarMySQL();
+//        DAOEmpleado emp =new DAOEmpleado();
+//        emp.altaEmpleado(new Empleado("Luis","Luis",2));
         
     }
 }

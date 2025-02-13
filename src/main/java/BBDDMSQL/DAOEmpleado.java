@@ -57,16 +57,13 @@ public class DAOEmpleado {
         return e;
     }
     
-    public void eliminarEmpleado(String nombre){
-    try {
+    public void eliminarEmpleado(String nombre) throws SQLException{
+    
         Connection con = conexion.conectarMySQL();
         ps = con.prepareStatement("DELETE FROM empleado WHERE nombre = ?");
         ps.setString(1, nombre);
         int res = ps.executeUpdate();
         con.close();
-    } catch (SQLException ex) {
-        System.err.println(ex);
-    }
     }
     
     public ArrayList<Empleado> getAll() throws SQLException{
