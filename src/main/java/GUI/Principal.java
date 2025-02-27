@@ -52,9 +52,9 @@ public class Principal {
             System.out.println("4.- Salir");
             x= sc.nextInt();        
             switch(x){
-                case 1 -> {submenu1();}
+                case 1 -> {menuEmpleado();}
                 case 2 -> {}
-                case 3 -> {submenu2();}
+                case 3 -> {menuProducto();}
                 case 4 -> {}
                 default ->{}            
                 }
@@ -63,7 +63,7 @@ public class Principal {
     }
     
     //Submenú para Gestionar Empleado
-    public void submenu1(){
+    public void menuEmpleado(){
             int y=0;           
             do{
             System.out.println("\nElija opción:");
@@ -151,7 +151,7 @@ public class Principal {
     }
     
     //Submenú para Gestionar Producto
-    public void submenu2(){
+    public void menuProducto(){
     int x=0;           
             do{
             System.out.println("\nElija opción:");
