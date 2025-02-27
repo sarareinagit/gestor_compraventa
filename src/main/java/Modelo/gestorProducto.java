@@ -4,8 +4,10 @@
  */
 package Modelo;
 
-import BBDD.Empleado;
-import BBDD.FachadaBBDD;
+
+
+import BBDDMSQL.FachadaBBDD;
+import BBDDMSQL.Producto;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -16,36 +18,43 @@ import java.util.Objects;
  */
 public class gestorProducto {
     
-    public void altaProducto(int cod_acceso, String nombre, double precio) throws Exception{
+    public void altaProducto(int cod_producto, String nombre, double precio, int cantidad) throws Exception{
      //Comprobar si el producto ya existe
-     Producto p = new FachadaBBDD().
-     Empleado p = new FachadaBBDD().getEmpleado(nombre);
+     Producto p = new FachadaBBDD().getProducto(nombre);
      if (Objects.nonNull(p)){
-     throw new Exception("El empleado existe");
+     throw new Exception("El producto existe");
      }
-     if (pass.length()<8){
-     throw new Exception("La password no tiene tamaño adecuado");
+     if (precio<=0){
+     throw new Exception("El precio no puede ser menor o igual a 0");
      }
-     if(codigo>0){
+     if (cantidad<=0){
+     throw new Exception("La cantidad no puede ser menor o igual a 0");
      }
-     new FachadaBBDD().altaEmpleado(new Empleado(nombre,pass,codigo));
+     if(cod_producto>0){
      }
-     
-     public void eliminarEmpleado(String e){
-     new FachadaBBDD().eliminarEmpleado(e);
-     
+     new FachadaBBDD().altaProducto(new Producto(cod_producto, nombre, precio, cantidad));
      }
-     
-     public ArrayList<Empleado> getAllEmpleado() throws SQLException{
-     return new FachadaBBDD().getAllEmpleado();
+   
+     public void modificarProducto(int cod_acceso, String nombre, double precio, int cantidad) throws Exception{
+     new FachadaBBDD().modificarProducto(new Producto(cod_acceso, nombre, precio,cantidad));
      }
      
-     public Empleado getEmpleado(String nombre_) throws SQLException{
-     return new FachadaBBDD().getEmpleado(nombre_);
+      public Producto getProducto(String nombre_) throws SQLException{
+     return new FachadaBBDD().getProducto(nombre_);
+     }
+      
+      
+     public void eliminarProducto(String p) throws SQLException{
+     new FachadaBBDD().getProducto(p);
+     
      }
      
-     public void modificarEmpleado(String nombre, String pass, int codigo) throws Exception{
-     new FachadaBBDD().modificarEmpleado(new Empleado(nombre,pass,codigo));
+     public ArrayList<Producto> getAllProducto() throws SQLException{
+     return new FachadaBBDD().getAllProducto();
      }
+     
+    
+     
+    
     
 }

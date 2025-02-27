@@ -4,7 +4,7 @@
  */
 package GUI;
 
-
+import BBDDMSQL.Producto;
 import BBDDMSQL.Empleado;
 import Modelo.Fachada;
 import java.sql.SQLException;
@@ -143,7 +143,7 @@ public class Principal {
                 }
             
             }
-            case 6 ->{System.out.println("Gracias por usar la aplicación");}
+            case 6 ->{System.out.println("Volviendo al menú principal...");}
             default -> {System.out.println("Introduce un valor adecuado");}
             
             }
@@ -163,12 +163,79 @@ public class Principal {
             System.out.println("6.- Salir");
             x=sc.nextInt();
                 switch(x){
-                    case 1 -> {}
-                    case 2 -> {}
-                    case 3 -> {}
-                    case 4 -> {}
-                    case 5 -> {}
-                    default -> {}
+                    case 1 -> { try {
+                        System.out.println("Introduce el código del producto:");
+                        int cod_acceso = sc.nextInt();  
+//                        int cod_producto = introduceCodigo();
+                        System.out.println("Introduce el nombre del producto:");
+                        String nombre = sc.next();
+                        
+                        System.out.println("Introduce precio:");
+                        double precio = sc.nextDouble();
+                        System.out.println("Introduce cantidad:");
+                        int cantidad = sc.nextInt();
+                        f.altaProducto(cod_acceso, nombre, precio, cantidad);
+                        }catch(Exception ex){
+                            System.out.println(ex.getMessage());    
+                        }
+                    }
+                    case 2 -> { try {
+                        System.out.println("Introduce el nombre del producto: ");
+                        String nombre = sc.next(); 
+                        Producto p = new Fachada().getProducto(nombre);
+                        if(p!=null){
+                        System.out.println(p.toString());
+                        System.out.println("Introduce el código: ");
+                        int cod_producto = sc.nextInt();
+                        System.out.println("Introduce precio: ");
+                        double precio = sc.nextDouble();
+                        System.out.println("Introduce cantidad: ");
+                        int cantidad = sc.nextInt();    
+                        f.modificarProducto(cod_producto, nombre, precio, cantidad);
+                        }else{
+                        System.out.println("El producto no existe");}              
+                        }catch(Exception ex){
+                            System.out.println(ex.getMessage());    
+                        }
+                    }
+                    case 3 -> { 
+                        try {
+                        System.out.println("Introduce el nombre del producto: ");
+                        String nombre = sc.next();
+                        Producto p = new Fachada().getProducto(nombre);
+                        if (p!=null){
+                            System.out.println(p.toString());
+                        }else{
+                            System.out.println("El producto no existe");
+                        }
+                        } catch (SQLException ex) {
+                        System.out.println("El usuario no existe.");
+                        }
+                    }
+                    case 4 -> {
+                        System.out.println("Indica el nombre del producto a eliminar: ");
+                        try {
+                        new Fachada().eliminarProducto(sc.next());
+                        } catch (SQLException ex) {
+                        System.out.println("El producto no existe.");
+                        }
+                    }
+                    case 5 -> {
+                        try {
+                        for(Producto p: new Fachada().getAllProducto()){
+                        System.out.println(p.toString());
+                        }
+                        } catch (SQLException ex) {
+                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    case 6 ->{
+                        System.out.println("Volviendo al menú principal...");
+                    }
+                    
+                    default -> {
+                        System.out.println("Introduce un valor adecuado");
+                    }
                 }   
             }while(x!=6);
     }

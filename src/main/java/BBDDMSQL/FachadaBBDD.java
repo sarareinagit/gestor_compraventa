@@ -47,8 +47,8 @@ public class FachadaBBDD {
         return new DAOProducto().getProducto(nombre);
     }
     
-    public void eliminarProducto(String p){
-        new DAOProducto().eliminarProducto(p);
+    public void eliminarProducto(String nombre){
+        new DAOProducto().eliminarProducto(nombre);
     }
     
     public void modificarProducto(Producto p){

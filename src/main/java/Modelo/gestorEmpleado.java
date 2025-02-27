@@ -21,7 +21,7 @@ public class gestorEmpleado {
  public int introducirEmpleado(String nombre, String password) throws Exception{
          
          Empleado pepe = new FachadaBBDD().getEmpleado(nombre);
-         System.out.println("Cual es el valor de pepe: "+ pepe.toString());
+         System.out.println("El administrador ha iniciado sesión");
            if (pepe!=null){
             //Comprobar la contraseña
                 if(!pepe.getPassword().equals(password)){

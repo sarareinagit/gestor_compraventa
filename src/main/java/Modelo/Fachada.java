@@ -6,6 +6,7 @@ package Modelo;
 
 
 import BBDDMSQL.Empleado;
+import BBDDMSQL.Producto;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -14,6 +15,9 @@ import java.util.ArrayList;
  * @author Ilerna 4.2.7
  */
 public class Fachada {
+    
+    
+    //EMPLEADOS
     
   public int autenticar(String nombre, String password) throws Exception{
     return new gestorEmpleado().introducirEmpleado(nombre, password);
@@ -41,6 +45,31 @@ public class Fachada {
     }
 
   
-   
+   //PRODUCTOS
     
+    
+    public void altaProducto(int cod_acceso, String nombre, double precio, int cantidad) throws Exception{
+        new gestorProducto().altaProducto(cod_acceso, nombre, precio, cantidad);
+   
+    }
+    
+    public void eliminarProducto(String p) throws SQLException{
+        new gestorProducto().eliminarProducto(p);
+    
+    }
+    
+    public ArrayList<Producto> getAllProducto() throws SQLException{
+        return new gestorProducto().getAllProducto();
+       
+    }
+    
+    public Producto getProducto(String nombre) throws SQLException{
+        return new gestorProducto().getProducto(nombre);
+        
+    }
+    
+    public void modificarProducto(int cod_acceso, String nombre, double precio, int cantidad) throws Exception{
+        new gestorProducto().modificarProducto(cod_acceso, nombre, precio, cantidad);
+    
+    }
 }

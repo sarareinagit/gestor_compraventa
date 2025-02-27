@@ -4,7 +4,6 @@
  */
 package BBDDMSQL;
 
-import BBDD.*;
 
 /**
  *
@@ -13,8 +12,8 @@ import BBDD.*;
 public class Empleado {
     
     //Atributos
-    String nombre,password;
-    int codAcceso;
+    private String nombre,password;
+    private int codAcceso;
 
     //Constructor
     public Empleado(String nombre, String password, int codAcceso) {

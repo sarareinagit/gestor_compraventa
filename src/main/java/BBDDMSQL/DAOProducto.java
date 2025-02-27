@@ -22,10 +22,11 @@ public class DAOProducto {
     public void altaProducto(Producto p){
         try {
             Connection con = conexion.conectarMySQL();
-            ps = con.prepareStatement("INSERT INTO productos (cod_producto, nombre, precio) VALUES(?,?,?)");
+            ps = con.prepareStatement("INSERT INTO productos (cod_producto, nombre, precio, cantidad) VALUES(?,?,?,?)");
             ps.setInt(1, p.getCod_producto());
             ps.setString(2, p.getNombre());
             ps.setDouble(3, p.getPrecio());
+            ps.setInt(4, p.getCantidad());
             int res = ps.executeUpdate();
             if (res > 0) {
                 System.out.println("Producto Guardado");            
@@ -49,6 +50,7 @@ public class DAOProducto {
             p.setCod_producto(rs.getInt("cod_producto"));
             p.setNombre(rs.getNString("nombre"));
             p.setPrecio(rs.getDouble("precio"));
+            p.setCantidad(rs.getInt("cantidad"));
         }else{       
             p=null;
         }
@@ -72,10 +74,11 @@ public class DAOProducto {
     public void modificarProducto(Producto p){
         try {
             Connection con = conexion.conectarMySQL();
-            ps = con.prepareStatement("UPDATE productos SET cod_acceso=?, precio=? where nombre=?");
+            ps = con.prepareStatement("UPDATE productos SET cod_producto=?, precio=?, cantidad=? where nombre=?");
             ps.setInt(1, p.getCod_producto());
             ps.setDouble(2, p.getPrecio());
-            ps.setString(3, p.getNombre());
+            ps.setInt(3, p.getCantidad());
+            ps.setString(4, p.getNombre());
             int res = ps.executeUpdate();
             if (res > 0) {
                 System.out.println("Producto Modificado");            
@@ -99,6 +102,7 @@ public class DAOProducto {
             p.setCod_producto(rs.getInt("cod_producto"));
             p.setNombre(rs.getNString("nombre"));
             p.setPrecio(rs.getDouble("precio"));
+            p.setCantidad(rs.getInt("cantidad"));
             lista.add(p);
         }        
         return lista;
