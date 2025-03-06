@@ -53,7 +53,7 @@ public class Principal {
             x= sc.nextInt();        
             switch(x){
                 case 1 -> {menuEmpleado();}
-                case 2 -> {}
+                case 2 -> {menuPedido();}
                 case 3 -> {menuProducto();}
                 case 4 -> {}
                 default ->{}            
@@ -150,6 +150,63 @@ public class Principal {
             }while(y!=6);
     }
     
+    
+    //Submenú para Gestionar Pedido
+    
+    public void menuPedido(){
+    
+     int x=0;           
+            do{
+            System.out.println("\nElija opción:");
+            System.out.println("1.- Realizar Pedido");
+            System.out.println("2.- Imprimir Factura");
+            System.out.println("3.- Salir");
+
+            x=sc.nextInt();
+                switch(x){
+                    case 1 -> { try {
+                        System.out.println("Introduce el código del producto:");
+                        int cod_acceso = sc.nextInt();  
+//                        int cod_producto = introduceCodigo();
+                        System.out.println("Introduce el nombre del producto:");
+                        String nombre = sc.next();
+                        
+                        System.out.println("Introduce precio:");
+                        double precio = sc.nextDouble();
+                        System.out.println("Introduce cantidad:");
+                        int cantidad = sc.nextInt();
+                        f.altaProducto(cod_acceso, nombre, precio, cantidad);
+                        }catch(Exception ex){
+                            System.out.println(ex.getMessage());    
+                        }
+                    }
+                    case 2 -> { try {
+                        System.out.println("Introduce el nombre del producto: ");
+                        String nombre = sc.next(); 
+                        Producto p = new Fachada().getProducto(nombre);
+                        if(p!=null){
+                        System.out.println(p.toString());
+                        System.out.println("Introduce el código: ");
+                        int cod_producto = sc.nextInt();
+                        System.out.println("Introduce precio: ");
+                        double precio = sc.nextDouble();
+                        System.out.println("Introduce cantidad: ");
+                        int cantidad = sc.nextInt();    
+                        f.modificarProducto(cod_producto, nombre, precio, cantidad);
+                        }else{
+                        System.out.println("El producto no existe");}              
+                        }catch(Exception ex){
+                            System.out.println(ex.getMessage());    
+                        }
+                    }
+                     
+                    default -> {
+                        System.out.println("Introduce un valor adecuado");
+                    }
+                }   
+            }while(x!=3);
+    }
+            
     //Submenú para Gestionar Producto
     public void menuProducto(){
     int x=0;           

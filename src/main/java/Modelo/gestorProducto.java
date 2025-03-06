@@ -45,7 +45,7 @@ public class gestorProducto {
       
       
      public void eliminarProducto(String p) throws SQLException{
-     new FachadaBBDD().getProducto(p);
+     new FachadaBBDD().eliminarProducto(p);
      
      }
      
