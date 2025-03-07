@@ -12,11 +12,17 @@ import java.util.ArrayList;
  */
 public class Pedido {
     
+    
+ 
+
+    
+
+
     //Atributos
     
     private int cod_pedido;
     private int cod_empleado; //(codAcceso)
-    private ArrayList<LineaPedido> lineaFactura;
+    private ArrayList<LineaPedido> lineaFactura = new ArrayList<>();
     
     //Constructor
 
@@ -58,6 +64,10 @@ public class Pedido {
     }
     
     
-    
+    public Pedido(int cod_empleado) {
+    this.cod_empleado = cod_empleado;
+    this.lineaFactura = new ArrayList<>();  // Inicialización en el constructor
+}
+
     
 }

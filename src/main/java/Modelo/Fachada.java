@@ -15,7 +15,14 @@ import java.util.ArrayList;
  * @author Ilerna 4.2.7
  */
 public class Fachada {
-    
+      // Instancia de gestorPedido
+    private gestorPedido gestorPedido;
+
+    // Constructor de Fachada
+    public Fachada() {
+        // Inicialización de gestorPedido
+        this.gestorPedido = new gestorPedido();
+    }
     
     //EMPLEADOS
     
@@ -71,5 +78,18 @@ public class Fachada {
     public void modificarProducto(int cod_acceso, String nombre, double precio, int cantidad) throws Exception{
         new gestorProducto().modificarProducto(cod_acceso, nombre, precio, cantidad);
     
+    }
+    
+    
+     //PEDIDOS
+    
+      // Método para manejar la lógica de realizar un pedido
+    public String realizarPedido(int codEmpleado, ArrayList<Integer> productosSeleccionados, ArrayList<Integer> cantidades) throws SQLException {
+        return gestorPedido.realizarPedido(codEmpleado, productosSeleccionados, cantidades);
+    }
+
+    // Método para imprimir la factura
+    public String imprimirFactura(int codPedido) throws SQLException {
+        return gestorPedido.imprimirFactura(codPedido);
     }
 }

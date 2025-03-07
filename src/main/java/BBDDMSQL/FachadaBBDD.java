@@ -59,5 +59,21 @@ public class FachadaBBDD {
         return new DAOProducto().getAll();
     }
     
+    
+     //Métodos para Pedidos
+    
+     // Método para obtener un pedido desde la base de datos
+    public Pedido obtenerPedido(int codPedido) throws SQLException {
+    // Crear una instancia de DAOPedido y llamar a su método obtenerPedido
+    DAOPedido daoPedido = new DAOPedido();
+    return daoPedido.obtenerPedido(codPedido);  // Llamada correcta al método
+    }
+
+    // Método para realizar un pedido y almacenarlo en la base de datos
+    public boolean realizarPedido(Pedido pedido) throws SQLException {
+    // Crear una instancia de DAOPedido y llamar a su método insertarPedido
+    DAOPedido daoPedido = new DAOPedido();
+    return daoPedido.insertarPedido(pedido);  // Llamada correcta al método
+    }
 }
 

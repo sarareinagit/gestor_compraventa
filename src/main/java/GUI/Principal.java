@@ -8,6 +8,7 @@ import BBDDMSQL.Producto;
 import BBDDMSQL.Empleado;
 import Modelo.Fachada;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -41,7 +42,7 @@ public class Principal {
         }        
     }
     
-    public void inicio(){
+    public void inicio() throws SQLException{
     int x;
         do{
             x=0;
@@ -153,7 +154,7 @@ public class Principal {
     
     //Submenú para Gestionar Pedido
     
-    public void menuPedido(){
+    public void menuPedido() throws SQLException{
     
      int x=0;           
             do{
@@ -164,42 +165,102 @@ public class Principal {
 
             x=sc.nextInt();
                 switch(x){
-                    case 1 -> { try {
-                        System.out.println("Introduce el código del producto:");
-                        int cod_acceso = sc.nextInt();  
-//                        int cod_producto = introduceCodigo();
-                        System.out.println("Introduce el nombre del producto:");
-                        String nombre = sc.next();
-                        
-                        System.out.println("Introduce precio:");
-                        double precio = sc.nextDouble();
-                        System.out.println("Introduce cantidad:");
-                        int cantidad = sc.nextInt();
-                        f.altaProducto(cod_acceso, nombre, precio, cantidad);
-                        }catch(Exception ex){
-                            System.out.println(ex.getMessage());    
+                    case 1 -> {
+                        // Solicitar el código de acceso del empleado
+                        System.out.println("Ingrese el código de acceso del empleado:");
+                        int codEmpleado = sc.nextInt();
+
+                        // Mostrar los productos disponibles
+                        System.out.println("\nProductos disponibles:");
+                        System.out.println(f.getAllProducto());  // Asegúrate de que este método esté mostrando los productos disponibles
+
+                        // Solicitar los productos que desea agregar al pedido
+                        ArrayList<Integer> productosSeleccionados = new ArrayList<>();
+                        ArrayList<Integer> cantidades = new ArrayList<>();
+
+                        boolean continuar = true;
+                        int maxProductos = 4; // Número máximo de productos permitidos
+
+                        // Bucle para agregar productos al pedido
+                        while (continuar && productosSeleccionados.size() < maxProductos) {
+                            // Solicitar el nombre del producto
+                            System.out.println("\nIntroduce el nombre del producto que deseas agregar (4 máximo):");
+                            String nombreProducto = sc.next();
+
+                        try {
+                            // Buscar el producto por nombre
+                            Producto p = new Fachada().getProducto(nombreProducto);
+
+                            if (p != null) {
+                                // Si el producto existe, agregarlo al pedido
+                                System.out.println("Producto encontrado: " + p.toString());
+
+                                productosSeleccionados.add(p.getCod_producto());  // Agregar el código del producto al ArrayList
+
+                                // Solicitar la cantidad
+                                System.out.println("Ingrese la cantidad para el producto " + p.getNombre() + ":");
+                                int cantidad = sc.nextInt();
+
+                                // Validar que la cantidad sea positiva
+                                if (cantidad > 0) {
+                                    cantidades.add(cantidad);  // Agregar la cantidad al ArrayList
+                                } else {
+                                    System.out.println("Cantidad inválida. Debe ser mayor que 0.");
+                                    // No se agrega el producto si la cantidad no es válida
+                                    productosSeleccionados.remove(productosSeleccionados.size() - 1);  // Eliminar el último producto agregado
+                                }
+                            } else {
+                                System.out.println("El producto no existe.");
+                            }
+
+                        } catch (SQLException ex) {
+                            System.out.println("Error al buscar el producto: " + ex.getMessage());
+                        }
+
+                        // Si ya se han seleccionado 4 productos, se muestra un mensaje
+                        if (productosSeleccionados.size() >= maxProductos) {
+                            System.out.println("Has alcanzado el límite máximo de productos (4 productos).");
                         }
                     }
-                    case 2 -> { try {
-                        System.out.println("Introduce el nombre del producto: ");
-                        String nombre = sc.next(); 
-                        Producto p = new Fachada().getProducto(nombre);
-                        if(p!=null){
-                        System.out.println(p.toString());
-                        System.out.println("Introduce el código: ");
-                        int cod_producto = sc.nextInt();
-                        System.out.println("Introduce precio: ");
-                        double precio = sc.nextDouble();
-                        System.out.println("Introduce cantidad: ");
-                        int cantidad = sc.nextInt();    
-                        f.modificarProducto(cod_producto, nombre, precio, cantidad);
-                        }else{
-                        System.out.println("El producto no existe");}              
-                        }catch(Exception ex){
-                            System.out.println(ex.getMessage());    
+
+                    // Llamar a la fachada para realizar el pedido
+
+                    String resultado = null;
+                    try {
+                        // Verificar que los productos seleccionados y cantidades no estén vacíos
+                        if (productosSeleccionados.isEmpty() || cantidades.isEmpty()) {
+                            System.out.println("No se ha seleccionado ningún producto o cantidad.");
+                        } else {
+                            // Imprimir los productos seleccionados y sus cantidades antes de intentar insertar
+                            System.out.println("Productos seleccionados para el pedido:");
+                            for (int i = 0; i < productosSeleccionados.size(); i++) {
+                                System.out.println("Código del Producto: " + productosSeleccionados.get(i) + " Cantidad: " + cantidades.get(i));
+                            }
+
+                            // Realizar el pedido en la base de datos
+                            resultado = f.realizarPedido(codEmpleado, productosSeleccionados, cantidades);
                         }
+                    } catch (SQLException ex) {
+                        System.out.println("Error al realizar el pedido: " + ex.getMessage());
+                        // Imprimir la traza del error para obtener más detalles
                     }
-                     
+                    System.out.println(resultado);
+
+                    }
+                    
+                    case 2 -> { 
+                        System.out.println("Ingrese el código del pedido para imprimir la factura:");
+                        int codPedido = sc.nextInt();
+
+                        // Llamar a la fachada para imprimir la factura
+                        String factura = null;
+                        try {
+                            factura = f.imprimirFactura(codPedido);
+                        } catch (SQLException ex) {
+                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        System.out.println(factura);
+                    } 
                     default -> {
                         System.out.println("Introduce un valor adecuado");
                     }
